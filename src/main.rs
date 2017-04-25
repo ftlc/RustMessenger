@@ -3,7 +3,8 @@ extern crate rustc_serialize;
 
 use std::io;
 use rustc_serialize::json;
-use std::net::{TcpStream, TcpListener, SocketAddr};
+use std::net::{TcpStream, SocketAddr};
+use std::net::TcpListener;
 use std::io::{Read, Write, BufReader, BufRead};
 use std::thread;
 
