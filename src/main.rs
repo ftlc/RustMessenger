@@ -1,4 +1,5 @@
 extern crate rustc_serialize;
+extern crate mio;
 
 
 use std::io;
@@ -18,12 +19,14 @@ pub struct Message {
 
 fn main() {
     let listener = TcpListener::bind("127.0.0.1:8371").unwrap();    
-    listener.set_nonblocking(true).expect("Can't set non-blocking");
     println!("listening started, ready to accept");
     
     for stream in listener.incoming() {
+        let mut stream = stream.unwrap();
+        stream.set_read_timeout(None).expect("set_read_timeout call failed");
+        stream.set_nodelay(true).expect("set_nodelay call failed");
+        stream.set_write_timeout(None).expect("set_write_timeout call failed");
         thread::spawn(|| {
-            let mut stream = stream.unwrap();
             handle_request(stream);
         });
     }
