@@ -1,0 +1,7 @@
+[package]
+name = "Server"
+version = "0.1.0"
+authors = ["ftlc <harrysadoyan@gmail.com>"]
+
+[dependencies]
+rustc-serialize = "0.3"
